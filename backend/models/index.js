@@ -20,7 +20,7 @@ db.sequelize = sequelize;
 
 
 // {force: true}
-db.sequelize.sync().then(() => {
+db.sequelize.sync({force: true}).then(() => {
     console.log('Sync DB');
 }).catch((err) => {
     console.log('ERR', err);
@@ -29,5 +29,18 @@ db.sequelize.sync().then(() => {
 
 
 db.signup = require('./signup')(sequelize, DataTypes)
-// db.msgs = require('./msg')(sequelize, DataTypes)
+db.registerhotel = require('./register_hotels')(sequelize, DataTypes)
+db.registerhotelroom = require('./hotels_room')(sequelize, DataTypes)
+
+
+db.signup.hasMany(db.registerhotel, { foreignKey: 'owner_id' });
+db.registerhotel.belongsTo(db.signup, { foreignKey: 'owner_id' });
+
+db.registerhotel.hasMany(db.registerhotelroom, { foreignKey: 'hotel_id' });
+db.registerhotelroom.belongsTo(db.registerhotel, { foreignKey: 'hotel_id' });
+
+db.signup.hasMany(db.registerhotelroom, { foreignKey: 'owner_id' });
+db.registerhotelroom.belongsTo(db.signup, { foreignKey: 'owner_id' });
+
+
 module.exports = db;

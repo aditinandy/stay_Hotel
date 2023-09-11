@@ -1,0 +1,80 @@
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="../../assets/images/img-01.png" alt="IMG">
+            </div>
+
+            <form class="login100-form validate-form" *ngIf="enterNumber" [formGroup]="getOTP" (ngSubmit)="loginOTP()">
+                <span class="login100-form-title">
+                    Login
+                </span>
+
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" formControlName="phone" name="phone" placeholder="Phone">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button type="submit" class="login100-form-btn">
+                        Send OTP
+                    </button>
+                </div>
+
+                <!-- <div class="text-center p-t-12">
+                    <span class="txt1">
+                        Forgot
+                    </span>
+                    <a class="txt2" href="#">
+                        Username / Password?
+                    </a>
+                </div> -->
+
+                <div class="text-center p-t-136" *ngIf="loginRedirection">
+                    <a class="txt2" (click)="loginForHotel()">
+                        Create your Account for register hotel or rooms
+                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="text-center p-t-136" *ngIf="!loginRedirection">
+                    <a class="txt2" (click)="loginForCustomer()">
+                        Create your Account for Customer
+                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </form>
+
+            <form class="login100-form validate-form" *ngIf="!enterNumber" [formGroup]="getOTPVerify"
+                (ngSubmit)="loginOTPVerify()">
+                <!-- <form (ngSubmit)="submitForm()" [formGroup]="otpForm" class="otp-form"> -->
+                <span class="login100-form-title">
+                    Login
+                </span>
+                <input type="text" formControlName="digit1" maxlength="1" class="otp-input" #digitInput
+                    [class.active]="activeField === 1" (input)="onDigitInput(1)" (click)="selectField(1)" (keydown)="onBackspace($event, 1)" />
+                <input type="text" formControlName="digit2" maxlength="1" class="otp-input" #digitInput
+                    [class.active]="activeField === 2" (input)="onDigitInput(2)" (click)="selectField(2)" (keydown)="onBackspace($event, 2)" />
+                <input type="text" formControlName="digit3" maxlength="1" class="otp-input" #digitInput
+                    [class.active]="activeField === 3" (input)="onDigitInput(3)" (click)="selectField(3)" (keydown)="onBackspace($event, 3)" />
+                <input type="text" formControlName="digit4" maxlength="1" class="otp-input" #digitInput
+                    [class.active]="activeField === 4" (input)="onDigitInput(4)" (click)="selectField(4)" (keydown)="onBackspace($event, 4)" />
+                <input type="text" formControlName="digit5" maxlength="1" class="otp-input" #digitInput
+                    [class.active]="activeField === 5" (input)="onDigitInput(5)" (click)="selectField(5)" (keydown)="onBackspace($event, 5)" />
+                <input type="text" formControlName="digit6" maxlength="1" class="otp-input" #digitInput
+                    [class.active]="activeField === 6" (input)="onDigitInput(6)" (click)="selectField(6)" (keydown)="onBackspace($event, 6)" />
+
+                <!-- <button type="submit" [disabled]="!otpForm.valid" class="submit-button"> -->
+                <div class="container-login100-form-btn">
+                    <button type="submit" class="login100-form-btn">
+                        Verify
+                    </button>
+                </div>
+                <!-- </form> -->
+
+            </form>
+        </div>
+    </div>
+</div>
